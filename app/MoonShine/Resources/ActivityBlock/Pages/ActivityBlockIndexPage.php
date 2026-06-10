@@ -17,6 +17,8 @@ use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Number;
 use MoonShine\Laravel\Fields\Slug;
+use MoonShine\Laravel\Fields\Relationships\HasMany;
+use App\MoonShine\Resources\Document\DocumentResource;
 use Throwable;
 
 
@@ -49,10 +51,18 @@ class ActivityBlockIndexPage extends IndexPage
                     'additional' => 'green',
                     default => 'gray'
                 }),
+            Select::make('Иконка', 'icon')
+                ->options([
+                    'study' => '🎓',
+                    'extracurricular' => '⚙️',
+                    'additional' => '🐢',
+                ]),
 
             Slug::make('URL', 'slug'),
 
             Number::make('Порядок', 'sort_order')->sortable(),
+            
+            
         ];
     }
 

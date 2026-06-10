@@ -30,7 +30,6 @@ class ActivityBlockDetailPage extends DetailPage
      */
     protected function fields(): iterable
     {
-        // Прямой список полей БЕЗ Box
         return [
             ID::make(),
 
@@ -49,13 +48,21 @@ class ActivityBlockDetailPage extends DetailPage
 
             Text::make('Заголовок', 'title'),
 
+             Select::make('Иконка', 'icon')
+            ->options([
+                 'study' => '🎓',
+                        'extracurricular' => '⚙️',
+                        'additional' => '🐢',
+            ]) ,
+
             Slug::make('URL (Slug)', 'slug'),
 
-            Preview::make('Текст задания', 'assignment_text'),
+            Preview::make('Описание программы', 'description'),
             
             Preview::make('Текст задания', 'assignment_text'),
 
             Number::make('Порядок сортировки', 'sort_order'),
+            
         ];
     }
 

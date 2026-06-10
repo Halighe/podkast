@@ -24,7 +24,8 @@ use MoonShine\Laravel\Fields\Relationships\HasMany;
 use App\MoonShine\Resources\Document\DocumentResource;
 use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
 use Throwable;
-
+use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
+use MoonShine\UI\Fields\File;
 
 /**
  * @extends FormPage<ActivityBlockResource>
@@ -51,6 +52,15 @@ class ActivityBlockFormPage extends FormPage
                 Text::make('Заголовок', 'title')
                     ->placeholder('Например: Инженерные классы')
                     ->required(),
+                    
+                Select::make('Иконка', 'icon')
+                    ->options([
+                        'study' => '🎓',
+                        'extracurricular' => '⚙️',
+                        'additional' => '🐢',
+                    ])
+                    ->required()
+                    ->default('study'),
 
                 Slug::make('Slug (URL)', 'slug')
                     ->from('title')
@@ -64,8 +74,20 @@ class ActivityBlockFormPage extends FormPage
                     ->default(0)
                     ->buttons(),
         
-                HasMany::make('Файлы', 'documents', resource: DocumentResource::class)
-                    ->creatable(),
+                RelationRepeater::make('Файлы', 'documents')
+                ->removable()
+                    ->fields([
+                        Text::make('Название для отображения', 'original_name')
+                            ->required(),
+
+                        File::make('Файл', 'file_path')
+                            ->disk('public')
+                            ->dir('documents')
+                            ->allowedExtensions(['pdf', 'docx', 'pptx']),
+
+                        Number::make('Порядок сортировки', 'sort_order')
+                            ->default(0),
+                    ]),
             ]),
         ];
     }

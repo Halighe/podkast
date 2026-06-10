@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ActivityBlock extends Model
 {
-    protected $fillable = ['type', 'slug', 'title', 'description', 'assignment_text', 'sort_order'];
+    protected $fillable = ['type', 'slug', 'title', 'icon', 'description', 'assignment_text', 'sort_order'];
 
     public function documents(): HasMany
     {

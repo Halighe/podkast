@@ -14,6 +14,7 @@ class ActivityBlockResource extends JsonResource
             'type' => $this->type,
             'slug' => $this->slug,
             'title' => $this->title,
+            'icon' => $this->icon,
             'description' => $this->description,
             'assignment_text' => $this->assignment_text,
             'sort_order' => $this->sort_order,
